@@ -81,14 +81,22 @@ plt.title('Music Genres', loc='center')
 plt.show()
 
 # Plotting a scatterplot with transparency
-sns.scatterplot(x=genre_filtered_data_frame[critical_band_1], y=genre_filtered_data_frame[critical_band_2], marker='o', hue=genre_filtered_data_frame['class'], alpha=0.05)
+sns.scatterplot(x=genre_filtered_data_frame[critical_band_1], y=genre_filtered_data_frame[critical_band_2], marker='o', hue=genre_filtered_data_frame['class'], alpha=0.3)
 plt.xlabel(critical_band_1)
 plt.ylabel(critical_band_2)
 plt.title('Music Genres', loc='center')
 plt.show()
 
 # Plotting a KDE Plot
-sns.kdeplot(data=genre_filtered_data_frame[critical_band_1], data2=genre_filtered_data_frame[critical_band_2], shade=True)
+data_frame_rock = genre_filtered_data_frame.loc[genre_filtered_data_frame['class'] == 'Rock']
+data_frame_pop = genre_filtered_data_frame.loc[genre_filtered_data_frame['class'] == 'Pop']
+data_frame_classical = genre_filtered_data_frame.loc[genre_filtered_data_frame['class'] == 'Classical']
+data_frame_jazz = genre_filtered_data_frame.loc[genre_filtered_data_frame['class'] == 'Jazz']
+
+sns.kdeplot(data=data_frame_rock[critical_band_1], data2=data_frame_rock[critical_band_2], shade=True, cmap="Reds", shade_lowest=False)
+sns.kdeplot(data=data_frame_pop[critical_band_1], data2=data_frame_pop[critical_band_2], shade=True, cmap="Blues", shade_lowest=False)
+#sns.kdeplot(data=data_frame_classical[critical_band_1], data2=data_frame_classical[critical_band_2], shade=True)
+#sns.kdeplot(data=data_frame_jazz[critical_band_1], data2=data_frame_jazz[critical_band_2], shade=True)
 plt.show()
 
 # Plotting a Facet Grid
@@ -117,12 +125,43 @@ plt.show()
 
 ## Let's deal with continuous and categorical variables together
 # Scatterplot
-rows_data = genre_filtered_data_frame.iloc[:,0:23]
-for row in rows_data.iterrows():
-  sns.scatterplot(x=bark_bands, y=row[1])
+#rows_data = genre_filtered_data_frame.iloc[:,0:23]
+#for row in rows_data.iterrows():
+#  sns.scatterplot(x=bark_bands, y=row[1])
+#plt.show()
+sns.scatterplot(x=genre_filtered_data_frame['class'], y=genre_filtered_data_frame[critical_band_1])
 plt.show()
+
 
 # Strip plot
 #for row in rows_data.iterrows():
 #  sns.stripplot(x=bark_bands, y=row[1], size=2)
 #plt.show()
+sns.stripplot(x=genre_filtered_data_frame['class'], y=genre_filtered_data_frame[critical_band_1], size=2)
+plt.show()
+
+# Combination between strip plots and box-plots
+sns.boxplot(x=genre_filtered_data_frame['class'], y=genre_filtered_data_frame[critical_band_1])
+sns.stripplot(x=genre_filtered_data_frame['class'], y=genre_filtered_data_frame[critical_band_1], alpha=0.1, jitter=0.3)
+plt.show()
+
+# box-plots
+sns.boxenplot(data= genre_filtered_data_frame)
+plt.show()
+
+# box-plots
+sns.boxenplot(x=genre_filtered_data_frame['class'], y=genre_filtered_data_frame[critical_band_1])
+plt.show()
+
+# Violin plot with a strip plot behind
+sns.violinplot(x=genre_filtered_data_frame['class'], y=genre_filtered_data_frame[critical_band_1])
+sns.stripplot(x=genre_filtered_data_frame['class'], y=genre_filtered_data_frame[critical_band_1],alpha=0.3, jitter=0.3)
+plt.show()
+
+# Violin plot with a strip plot behind
+sns.violinplot(data=genre_filtered_data_frame)
+plt.show()
+
+# Swarm plot
+sns.swarmplot(x = genre_filtered_data_frame['class'], y = genre_filtered_data_frame[critical_band_1])
+plt.show()
