@@ -64,6 +64,12 @@ genre_filtered_data_frame = genre_filtered_data_frame.rename(
 
 plt.rcParams['figure.figsize'] = (15,15)
 
+# Filtering by genre
+data_frame_rock = genre_filtered_data_frame.loc[genre_filtered_data_frame['class'] == 'Rock']
+data_frame_pop = genre_filtered_data_frame.loc[genre_filtered_data_frame['class'] == 'Pop']
+data_frame_classical = genre_filtered_data_frame.loc[genre_filtered_data_frame['class'] == 'Classical']
+data_frame_jazz = genre_filtered_data_frame.loc[genre_filtered_data_frame['class'] == 'Jazz']
+
 # Let's try to do a correlation analysis with the 23 features:
 correlation = genre_filtered_data_frame.corr()
 #sns.heatmap(correlation, annot=True, fmt='g')
@@ -81,7 +87,7 @@ plt.show()
 
 # Plotting distribution graphs
 fig, axes = plt.subplots(3,1)
-sns.distplot(genre_filtered_data_frame[critical_band_1], kde=True, rug=False, ax=axes[0])
+graph = sns.distplot(genre_filtered_data_frame[critical_band_1], kde=True, rug=False, ax=axes[0])
 sns.distplot(genre_filtered_data_frame[critical_band_1], kde=False, rug=True, ax=axes[1])
 sns.kdeplot(data=genre_filtered_data_frame[critical_band_1], ax=axes[2], shade=True)
 plt.show()
@@ -91,6 +97,22 @@ fig, axes = plt.subplots(3,1)
 sns.boxplot(x = genre_filtered_data_frame[critical_band_1], ax=axes[0])
 sns.boxenplot(x = genre_filtered_data_frame[critical_band_1], ax=axes[1])
 sns.violinplot(x=genre_filtered_data_frame[critical_band_1], ax=axes[2])
+plt.show()
+
+# Plotting distribution graphs
+fig, axes = plt.subplots(4,1)
+axes[0].title.set_text("Rock")
+axes[1].title.set_text("Pop")
+axes[2].title.set_text("Classical")
+axes[3].title.set_text("Jazz")
+# sns.kdeplot(data=data_frame_rock[critical_band_1], ax=axes[0], shade=True, color='b')
+# sns.kdeplot(data=data_frame_pop[critical_band_1], ax=axes[1], shade=True, color='r')
+# sns.kdeplot(data=data_frame_classical[critical_band_1], ax=axes[2], shade=True, color='g')
+# sns.kdeplot(data=data_frame_jazz[critical_band_1], ax=axes[3], shade=True, color='y')
+sns.boxplot(x = data_frame_rock[critical_band_1], ax=axes[0])
+sns.boxplot(x = data_frame_pop[critical_band_1], ax=axes[1])
+sns.boxplot(x = data_frame_classical[critical_band_1], ax=axes[2])
+sns.boxplot(x = data_frame_jazz[critical_band_1], ax=axes[3])
 plt.show()
 
 ## Multivariate analysis
@@ -109,11 +131,6 @@ plt.title('Music Genres', loc='center')
 plt.show()
 
 # Plotting a KDE Plot
-data_frame_rock = genre_filtered_data_frame.loc[genre_filtered_data_frame['class'] == 'Rock']
-data_frame_pop = genre_filtered_data_frame.loc[genre_filtered_data_frame['class'] == 'Pop']
-data_frame_classical = genre_filtered_data_frame.loc[genre_filtered_data_frame['class'] == 'Classical']
-data_frame_jazz = genre_filtered_data_frame.loc[genre_filtered_data_frame['class'] == 'Jazz']
-
 plt.show()
 sns.kdeplot(data=genre_filtered_data_frame[critical_band_1], data2=genre_filtered_data_frame[critical_band_2], shade=True)
 f = sns.FacetGrid(genre_filtered_data_frame, col='class', hue='class')
@@ -172,6 +189,6 @@ sns.stripplot(x=genre_filtered_data_frame['class'], y=genre_filtered_data_frame[
 plt.show()
 
 # Swarm plot
-sns.swarmplot(x = genre_filtered_data_frame['class'], y = genre_filtered_data_frame[critical_band_1], size=3)
+sns.swarmplot(x = genre_filtered_data_frame['class'], y = genre_filtered_data_frame[critical_band_1], size=4)
 plt.show()
 
