@@ -160,7 +160,7 @@ plt.show()
 with sns.axes_style("white"):
     sns.jointplot(x=genre_filtered_data_frame[critical_band_1], y=genre_filtered_data_frame[critical_band_2], kind="hex");
 plt.show()
-#Sampling
+# Sampling
 genre_filtered_data_frame_sample = genre_filtered_data_frame.sample(1000)
 sns.scatterplot(x=genre_filtered_data_frame_sample[critical_band_1], y=genre_filtered_data_frame_sample[critical_band_2], marker='o', hue=genre_filtered_data_frame_sample['class'])
 plt.show()
